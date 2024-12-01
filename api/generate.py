@@ -7,35 +7,33 @@ app = Flask(__name__)
 @app.route('/api/generate', methods=['POST'])
 def generate():
     data = request.json
-    prompt = data.get('prompt')
+    messages = data.get('messages', [])
 
-    if not prompt:
-        return jsonify({"error": "No prompt provided"}), 400
+    if not messages:
+        return jsonify({"error": "No messages provided"}), 400
 
     try:
+        # Prepare the conversation history for Ollama
+        ollama_messages = [{"role": msg["role"], "content": msg["content"]} for msg in messages]
+
         response = requests.post(
-            "http://localhost:11434/api/generate",
+            "http://localhost:11434/api/chat",
             json={
                 "model": "gemma2:2b",
-                "prompt": prompt
+                "messages": ollama_messages
             },
-            stream=True  # Enable streaming
+            stream=True
         )
         response.raise_for_status()
 
-        # Initialize an empty string to store the complete response
         full_response = ""
-
-        # Iterate through the streaming response
         for line in response.iter_lines():
             if line:
                 try:
-                    # Attempt to parse each line as JSON
                     json_response = json.loads(line)
-                    if 'response' in json_response:
-                        full_response += json_response['response']
+                    if 'message' in json_response:
+                        full_response += json_response['message']['content']
                 except json.JSONDecodeError:
-                    # If a line can't be parsed as JSON, log it and continue
                     print(f"Warning: Could not parse line as JSON: {line}")
 
         return jsonify({"generated_text": full_response})
