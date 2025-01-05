@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import ReactMarkdown from 'react-markdown'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
@@ -64,7 +65,7 @@ export default function Home() {
                       : 'bg-gray-200 text-black'
                   }`}
                 >
-                  {message.content}
+                  <ReactMarkdown>{message.content}</ReactMarkdown>
                 </div>
               </div>
             ))}
@@ -86,4 +87,3 @@ export default function Home() {
     </div>
   )
 }
-
