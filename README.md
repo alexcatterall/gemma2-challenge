@@ -1,9 +1,24 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js and npm/yarn/pnpm/bun installed
+- Python 3.x installed
+- Ollama installed
 
+### Setup Steps
+
+1. Start the Ollama server:
+```bash
+ollama serve
+'''
+2. Start the Python backend:
+'''bash
+python3 api/generate.py
+'''
+3. Run the Next.js app:
 ```bash
 npm run dev
 # or
@@ -12,7 +27,7 @@ yarn dev
 pnpm dev
 # or
 bun dev
-```
+'''
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
