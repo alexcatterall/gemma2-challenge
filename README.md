@@ -13,11 +13,13 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 1. Start the Ollama server:
 ```bash
 ollama serve
-'''
+```
+
 2. Start the Python backend:
-'''bash
+```bash 
 python3 api/generate.py
-'''
+```
+
 3. Run the Next.js app:
 ```bash
 npm run dev
@@ -27,7 +29,7 @@ yarn dev
 pnpm dev
 # or
 bun dev
-'''
+```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
